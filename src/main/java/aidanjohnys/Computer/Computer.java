@@ -26,7 +26,9 @@ public class Computer {
         controlUnit = new ControlUnit();
         memory = new Memory();
         io = new IO();
-        clock = new Clock();
+        clock = new Clock(this);
+
+        clock.tick();
     }
 
     public void cycle() {
