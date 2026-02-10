@@ -1,6 +1,7 @@
 package aidanjohnys.Computer;
 
 import static aidanjohnys.Computer.Computer.*;
+import static aidanjohnys.Computer.Instructions.*;
 
 public class ControlUnit {
     private final Computer computer;
@@ -71,13 +72,13 @@ public class ControlUnit {
 
         switch (instruction) {
             // Halt
-            case 0x00:
+            case HLT:
                 System.exit(0);
                 break;
 
             // Add or Subtract (Zero Page)
-            case 0x01:
-            case 0x02:
+            case ADD:
+            case SUB:
                 if (executeStep == 0x00) {
                     // Get the data from the memory location
 
@@ -112,8 +113,8 @@ public class ControlUnit {
                 break;
 
             // Add or Subtract (Immediate)
-            case 0x0C:
-            case 0x0D:
+            case ADI:
+            case SBI:
                 // Put the number on the MDR
                 computer.memoryDataRegister = (byte) (computer.instructionRegister & 0xFF);
 
@@ -122,7 +123,7 @@ public class ControlUnit {
                 break;
 
             // Store Accumulator
-            case 0x03:
+            case STA:
                 if (executeStep == 0x00) {
                     // Copy accumulator value to MDR
                     computer.memoryDataRegister = computer.accumulator;
@@ -151,7 +152,7 @@ public class ControlUnit {
                 break;
 
             // Load Accumulator
-            case 0x04:
+            case LDA:
                 if (executeStep == 0x00) {
                     // Get the data from memory
 
@@ -184,7 +185,7 @@ public class ControlUnit {
                 break;
 
             // Load Accumulator (Immediate)
-            case 0x05:
+            case LDI:
                 computer.accumulator = (byte) (computer.instructionRegister & 0xFF);
 
                 // Reset execute step
@@ -192,51 +193,8 @@ public class ControlUnit {
                 executeStep = 0x00;
                 break;
 
-            // Load Accumulator (Address in accumulator + offset)
-            case 0x06:
-                if (executeStep == 0x00) {
-                    // Copy offset into MDR
-                    computer.memoryDataRegister = (byte) (computer.instructionRegister & 0xFF);
-
-                    // ALU Operation
-                    computer.arithmeticLogicUnit.performOperation();
-
-                    // Wait for operation to be carried out
-                    executeStep = 0x01;
-                }
-
-                else if (executeStep == 0x01) {
-                    // Copy memory address from accumulator
-                    computer.memoryAddressRegister = computer.accumulator;
-
-                    // Send read signal over control bus
-                    computer.controlBus = CONTROL_READ;
-
-                    // Put address on address bus
-                    computer.addressBus = computer.memoryAddressRegister;
-
-                    // Wait for data to come next cycle
-                    executeStep = 0x02;
-                }
-
-                else if (executeStep == 0x02) {
-                    // Receive data from memory
-                    computer.memoryDataRegister = (byte) (computer.dataBus & 0xFF);
-
-                    // Clear control signal
-                    computer.controlBus = CONTROL_CLEAR;
-
-                    // Copy to accumulator
-                    computer.accumulator = (byte) computer.memoryDataRegister;
-
-                    // Reset execute step
-                    instructionCycleStep = 0x00;
-                    executeStep = 0x00;
-                }
-                break;
-
             // Jump (Unconditional)
-            case 0x09:
+            case JMP:
                 // Set program counter to address given
                computer.program_counter = (byte) (computer.instructionRegister & 0xFF);
 
@@ -246,7 +204,7 @@ public class ControlUnit {
                 break;
 
             // Jump if zero
-            case 0x0A:
+            case JPZ:
                 // Check if accumulator is equal to zero
                 if (computer.accumulator == 0x00) {
                     // Set program counter to address given
@@ -259,7 +217,7 @@ public class ControlUnit {
                 break;
 
             // Jump if not zero
-            case 0x0B:
+            case JNZ:
                 // Check if accumulator is not equal to zero
                 if (computer.accumulator != 0x00) {
                     // Set program counter to address given
@@ -272,7 +230,7 @@ public class ControlUnit {
                 break;
 
             // Jump if carry is set
-            case 0x0E:
+            case JCS:
                 // Check if ALU carry bit is set
                 if (computer.arithmeticLogicUnit.carryBit == 0x01) {
                     // Set program counter to address given
@@ -285,7 +243,7 @@ public class ControlUnit {
                 break;
 
             // Jump if carry is clear
-            case 0x0F:
+            case JCC:
                 // Check if ALU carry bit is clear
                 if (computer.arithmeticLogicUnit.carryBit == 0x00) {
                     // Set program counter to address given
