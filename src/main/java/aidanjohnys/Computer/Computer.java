@@ -1,21 +1,24 @@
 package aidanjohnys.Computer;
 
 public class Computer {
-    // Registers
+    public static final byte CONTROL_CLEAR = 0x00;
+    public static final byte CONTROL_READ = 0x01;
+    public static final byte CONTROL_WRITE = 0x02;
 
-    private byte program_counter = 0;
-    private byte accumulator = 0;
-    private byte instruction_register = 0;
-    private byte memory_address_register = 0;
-    private byte memory_data_register = 0;
+    // Registers
+    public byte program_counter = 0;
+    public byte accumulator = 0;
+    public short instructionRegister = 0;
+    public byte memoryAddressRegister = 0;
+    public short memoryDataRegister = 0;
 
     // Buses
-    public char data_bus = 0;
-    public byte address_bus = 0;
-    public byte control_bus = 0;
+    public short dataBus = 0;
+    public byte addressBus = 0;
+    public byte controlBus = 0;
 
     // Units
-    private final ArithmeticLogicUnit arithmeticLogicUnit;
+    public final ArithmeticLogicUnit arithmeticLogicUnit;
     private final ControlUnit controlUnit;
     private final Memory memory;
     private final IO io;
@@ -23,7 +26,7 @@ public class Computer {
 
     public Computer() {
         arithmeticLogicUnit = new ArithmeticLogicUnit();
-        controlUnit = new ControlUnit();
+        controlUnit = new ControlUnit(this);
         memory = new Memory();
         io = new IO();
         clock = new Clock(this);
