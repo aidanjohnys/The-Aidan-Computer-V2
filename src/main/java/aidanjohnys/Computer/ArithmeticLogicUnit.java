@@ -18,6 +18,14 @@ public class ArithmeticLogicUnit {
             case ADI:
                 carryBit = 0;
                 computer.accumulator = addNum(computer.accumulator, (byte) computer.memoryDataRegister);
+                break;
+
+            case SUB:
+            case SBI:
+                // Two's Compliment flip bits and add one
+                carryBit = 1;
+                computer.accumulator = addNum(computer.accumulator, (byte) ~computer.memoryDataRegister);
+                break;
         }
 
     }
