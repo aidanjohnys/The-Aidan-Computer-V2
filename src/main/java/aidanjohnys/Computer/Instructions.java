@@ -1,6 +1,6 @@
 package aidanjohnys.Computer;
 
-class Instructions {
+public class Instructions {
     public static final byte HLT = 0x00;
     public static final byte ADD = 0x01;
     public static final byte ADI = 0x0C;

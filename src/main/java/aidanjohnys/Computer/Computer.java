@@ -25,13 +25,11 @@ public class Computer {
     private final Clock clock;
 
     public Computer() {
-        arithmeticLogicUnit = new ArithmeticLogicUnit();
+        arithmeticLogicUnit = new ArithmeticLogicUnit(this);
         controlUnit = new ControlUnit(this);
         memory = new Memory();
         io = new IO();
         clock = new Clock(this);
-
-        clock.tick();
     }
 
     public void cycle() {
