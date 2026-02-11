@@ -3,8 +3,8 @@ package aidanjohnys.Computer;
 import static aidanjohnys.Computer.Computer.*;
 
 public class Memory implements AddressableMemory {
-    private static final char CAPACITY_BYTES = 0x254;
-    private static final char LOCATION = 0x0000;
+    private static final char CAPACITY_BYTES = 254;
+    private static final char LOCATION = 0;
     private final byte[] memory;
     private final Computer computer;
 
@@ -38,6 +38,18 @@ public class Memory implements AddressableMemory {
         byte address = computer.addressBus;
         // Todo: add range check
         memory[address] = (byte) computer.dataBus;
+    }
+
+    public void loadIntoMemory(byte[] bytes) {
+        int index = 0;
+        for (byte b : bytes) {
+            memory[index++] = b;
+
+            if (index >= CAPACITY_BYTES) {
+                System.err.println("Warning: loaded program is larger than memory size! Stopped reading.");
+                return;
+            }
+        }
     }
 
     @Override

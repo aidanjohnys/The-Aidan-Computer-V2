@@ -3,7 +3,7 @@ package aidanjohnys.Computer;
 public class FullAdder {
     private byte carryOut;
 
-    public void FullAdder() {
+    public FullAdder() {
         carryOut = 0;
     }
 

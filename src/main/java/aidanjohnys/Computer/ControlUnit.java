@@ -68,7 +68,7 @@ public class ControlUnit {
     }
 
     private void executeInstruction() {
-        short instruction = (short) ((computer.instructionRegister >> 8) & 0xFF);
+        byte instruction = (byte) ((computer.instructionRegister >> 8) & 0xFF);
 
         switch (instruction) {
             // Halt
@@ -254,6 +254,9 @@ public class ControlUnit {
                 instructionCycleStep = 0x00;
                 executeStep = 0x00;
                 break;
+
+            default:
+                throw new IllegalStateException("An illegal opcode has been used, stopping now.");
         }
     }
 }
