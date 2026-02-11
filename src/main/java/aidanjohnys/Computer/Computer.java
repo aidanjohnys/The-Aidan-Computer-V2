@@ -27,7 +27,7 @@ public class Computer {
     public Computer() {
         arithmeticLogicUnit = new ArithmeticLogicUnit(this);
         controlUnit = new ControlUnit(this);
-        memory = new Memory();
+        memory = new Memory(this);
         io = new IO();
         clock = new Clock(this);
     }

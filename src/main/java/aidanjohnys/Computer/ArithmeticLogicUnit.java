@@ -27,7 +27,6 @@ public class ArithmeticLogicUnit {
                 computer.accumulator = addNum(computer.accumulator, (byte) ~computer.memoryDataRegister);
                 break;
         }
-
     }
 
     private byte addNum(byte numA, byte numB) {
