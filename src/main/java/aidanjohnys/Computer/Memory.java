@@ -5,12 +5,12 @@ import static aidanjohnys.Computer.Computer.*;
 public class Memory implements AddressableMemory {
     private static final char CAPACITY_BYTES = 254;
     private static final char LOCATION = 0;
-    private final byte[] memory;
+    private final short[] memory;
     private final Computer computer;
 
     public Memory(Computer computer) {
         this.computer = computer;
-        memory = new byte[CAPACITY_BYTES];
+        memory = new short[CAPACITY_BYTES / 2];
     }
 
     public void cycle() {
@@ -37,18 +37,18 @@ public class Memory implements AddressableMemory {
     public void write() {
         byte address = computer.addressBus;
         // Todo: add range check
-        memory[address] = (byte) computer.dataBus;
+        memory[address] = computer.dataBus;
     }
 
     public void loadIntoMemory(byte[] bytes) {
-        int index = 0;
-        for (byte b : bytes) {
-            memory[index++] = b;
-
-            if (index >= CAPACITY_BYTES) {
+        for (int i = 0; i < bytes.length; i += 2) {
+            if (i >= CAPACITY_BYTES) {
                 System.err.println("Warning: loaded program is larger than memory size! Stopped reading.");
                 return;
             }
+
+            memory[i] = (short) (bytes[i] << 8);
+            memory[i] += bytes[i + 1];
         }
     }
 

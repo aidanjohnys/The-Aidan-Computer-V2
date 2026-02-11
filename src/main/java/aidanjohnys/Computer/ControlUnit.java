@@ -73,7 +73,7 @@ public class ControlUnit {
         switch (instruction) {
             // Halt
             case HLT:
-                System.exit(0);
+                computer.status = COMPUTER_STATUS_HALT;
                 break;
 
             // Add or Subtract (Zero Page)
@@ -256,6 +256,7 @@ public class ControlUnit {
                 break;
 
             default:
+                computer.status = COMPUTER_STATUS_ILLEGAL_OPERATION;
                 throw new IllegalStateException("An illegal opcode has been used, stopping now.");
         }
     }

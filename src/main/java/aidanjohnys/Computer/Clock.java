@@ -2,6 +2,8 @@ package aidanjohnys.Computer;
 
 import java.util.concurrent.TimeUnit;
 
+import static aidanjohnys.Computer.Computer.COMPUTER_STATUS_READY;
+
 public class Clock {
     private final static int CLOCK_SPEED_HZ = 50;
     private final Computer computer;
@@ -12,7 +14,7 @@ public class Clock {
     }
 
     public void tick() {
-        while (true) {
+        while (computer.status == COMPUTER_STATUS_READY) {
             try {
                 TimeUnit.SECONDS.sleep(1 / CLOCK_SPEED_HZ);
             }
