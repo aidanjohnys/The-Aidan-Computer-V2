@@ -11,7 +11,7 @@ public class ControlUnitTest {
         byte numA = 50;
         byte numB = 30;
 
-        computer.loadProgramIntoMemory(new byte[] {ADD, 0x02, (byte) 0x00, numA});
+        computer.loadProgramIntoMemory(new byte[] {ADD, 0x01, (byte) 0x00, numA});
         computer.accumulator = numB;
         computer.start();
         Assertions.assertEquals(80, computer.accumulator);
@@ -28,4 +28,17 @@ public class ControlUnitTest {
         computer.start();
         Assertions.assertEquals(80, computer.accumulator);
     }
+
+    @Test
+    public void subtractTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+        byte numB = 30;
+
+        computer.loadProgramIntoMemory(new byte[] {SUB, 0x01, (byte) 0x00, numB});
+        computer.accumulator = numA;
+        computer.start();
+        Assertions.assertEquals(20, computer.accumulator);
+    }
+
 }
