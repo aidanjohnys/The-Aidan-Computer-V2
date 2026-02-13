@@ -41,4 +41,15 @@ public class ControlUnitTest {
         Assertions.assertEquals(20, computer.accumulator);
     }
 
+    @Test
+    public void subtractImmediateTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+        byte numB = 30;
+
+        computer.loadProgramIntoMemory(new byte[] {SBI, numB});
+        computer.accumulator = numA;
+        computer.start();
+        Assertions.assertEquals(20, computer.accumulator);
+    }
 }
