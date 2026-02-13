@@ -120,6 +120,10 @@ public class ControlUnit {
 
                 // ALU operation
                 computer.arithmeticLogicUnit.performOperation();
+
+                // Reset execute step
+                instructionCycleStep = 0x00;
+                executeStep = 0x00;
                 break;
 
             // Store Accumulator

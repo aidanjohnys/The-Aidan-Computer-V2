@@ -12,8 +12,18 @@ public class ControlUnitTest {
         byte numB = 30;
 
         computer.loadProgramIntoMemory(new byte[] {ADD, 0x02, (byte) 0x00, numA});
-        computer.instructionRegister = ADD << 8;
+        computer.accumulator = numB;
+        computer.start();
+        Assertions.assertEquals(80, computer.accumulator);
+    }
 
+    @Test
+    public void addImmediateTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+        byte numB = 30;
+
+        computer.loadProgramIntoMemory(new byte[] {ADI, numA});
         computer.accumulator = numB;
         computer.start();
         Assertions.assertEquals(80, computer.accumulator);
