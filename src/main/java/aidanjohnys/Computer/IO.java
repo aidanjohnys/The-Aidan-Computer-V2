@@ -89,6 +89,7 @@ public class IO implements AddressableMemory {
 
     private void printCharacter() {
         System.out.printf("%c", buffer);
+        System.out.flush();
         status = IO_IDLE;
     }
 
