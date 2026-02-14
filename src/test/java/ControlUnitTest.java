@@ -84,4 +84,88 @@ public class ControlUnitTest {
         computer.start();
         Assertions.assertEquals(numA, computer.getMemory()[ptr]);
     }
+
+    @Test
+    public void jumpTest() {
+        Computer computer = new Computer();
+        byte ptr = 0x02;
+        computer.loadProgramIntoMemory(new byte[] {JMP, ptr, HLT, 0, HLT, 0});
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+    }
+
+    @Test
+    public void jumpIfZeroTest() {
+        // Should jump
+        Computer computer = new Computer();
+        byte ptr = 0x02;
+        computer.loadProgramIntoMemory(new byte[] {JPZ, ptr, HLT, 0, HLT, 0});
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+
+        // Shouldn't jump
+        computer = new Computer();
+        ptr = 0x01;
+        computer.loadProgramIntoMemory(new byte[] {JPZ, ptr, HLT, 0, HLT, 0});
+        computer.accumulator = 50;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+    }
+
+    @Test
+    public void jumpIfNotZeroTest() {
+        // Should jump
+        Computer computer = new Computer();
+        byte ptr = 0x02;
+        computer.loadProgramIntoMemory(new byte[] {JNZ, ptr, HLT, 0, HLT, 0});
+        computer.accumulator = 50;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+
+        // Shouldn't jump
+        computer = new Computer();
+        ptr = 0x01;
+        computer.loadProgramIntoMemory(new byte[] {JNZ, ptr, HLT, 0, HLT, 0});
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+    }
+
+    @Test
+    public void jumpIfCarrySetTest() {
+        // Should jump
+        Computer computer = new Computer();
+        byte ptr = 0x02;
+        computer.loadProgramIntoMemory(new byte[] {JCS, ptr, HLT, 0, HLT, 0});
+        computer.arithmeticLogicUnit.carryBit = 1;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+
+        // Shouldn't jump
+        computer = new Computer();
+        ptr = 0x01;
+        computer.loadProgramIntoMemory(new byte[] {JCS, ptr, HLT, 0, HLT, 0});
+        computer.arithmeticLogicUnit.carryBit = 0;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+    }
+
+    @Test
+    public void jumpIfCarryClearTest() {
+        // Should jump
+        Computer computer = new Computer();
+        byte ptr = 0x02;
+        computer.loadProgramIntoMemory(new byte[] {JCC, ptr, HLT, 0, HLT, 0});
+        computer.arithmeticLogicUnit.carryBit = 0;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+
+        // Shouldn't jump
+        computer = new Computer();
+        ptr = 0x01;
+        computer.loadProgramIntoMemory(new byte[] {JCC, ptr, HLT, 0, HLT, 0});
+        computer.arithmeticLogicUnit.carryBit = 1;
+        computer.start();
+        Assertions.assertEquals(ptr + 1, computer.program_counter);
+
+    }
 }
