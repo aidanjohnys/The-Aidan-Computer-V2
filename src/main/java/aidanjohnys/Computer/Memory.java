@@ -53,8 +53,8 @@ public class Memory implements AddressableMemory {
                 return;
             }
 
-            memory[i / 2] = (short) (bytes[i] << 8);
-            memory[i / 2] += bytes[i + 1];
+            short word = (short) ((short) ((bytes[i] & 0xFF) << 8) | (bytes[i + 1] & 0xFF));
+            memory[i / 2] = word;
         }
     }
 
