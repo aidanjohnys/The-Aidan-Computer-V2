@@ -61,4 +61,8 @@ public class Computer {
     public void loadProgramIntoMemory(byte[] bytes) {
         memory.loadIntoMemory(bytes);
     }
+
+    public short[] getMemory() {
+        return memory.getMemory();
+    }
 }

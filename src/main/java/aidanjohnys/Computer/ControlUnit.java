@@ -23,7 +23,7 @@ public class ControlUnit {
         }
 
         // Execute
-        if (instructionCycleStep == 0x01) {
+        else if (instructionCycleStep == 0x01) {
             executeInstruction();
         }
     }
@@ -133,7 +133,7 @@ public class ControlUnit {
                     computer.memoryDataRegister = computer.accumulator;
 
                     // Put data on data bus
-                    computer.dataBus = computer.memoryAddressRegister;
+                    computer.dataBus = computer.memoryDataRegister;
 
                     // Put address on address bus
                     computer.addressBus = (byte) (computer.instructionRegister & 0xFF);

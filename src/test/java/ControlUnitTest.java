@@ -72,4 +72,16 @@ public class ControlUnitTest {
         computer.start();
         Assertions.assertEquals(50, computer.accumulator);
     }
+
+    @Test
+    public void storeTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+        byte ptr = 0x02;
+
+        computer.loadProgramIntoMemory(new byte[] {STA, ptr});
+        computer.accumulator = numA;
+        computer.start();
+        Assertions.assertEquals(numA, computer.getMemory()[ptr]);
+    }
 }

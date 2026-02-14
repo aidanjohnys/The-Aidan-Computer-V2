@@ -34,7 +34,7 @@ public class Memory implements AddressableMemory {
         computer.dataBus = memory[address];
     }
 
-    public void write() {
+    private void write() {
         byte address = computer.addressBus;
         // Todo: add range check
         memory[address] = computer.dataBus;
@@ -50,6 +50,10 @@ public class Memory implements AddressableMemory {
             memory[i / 2] = (short) (bytes[i] << 8);
             memory[i / 2] += bytes[i + 1];
         }
+    }
+
+    public short[] getMemory() {
+        return memory;
     }
 
     @Override
