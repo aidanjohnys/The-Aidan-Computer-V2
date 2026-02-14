@@ -30,13 +30,19 @@ public class Memory implements AddressableMemory {
 
     private void read() {
         byte address = computer.addressBus;
-        // Todo: add range check
+        if (address < LOCATION || address >= CAPACITY_BYTES) {
+            return;
+        }
+
         computer.dataBus = memory[address];
     }
 
     private void write() {
         byte address = computer.addressBus;
-        // Todo: add range check
+        if (address < LOCATION || address >= CAPACITY_BYTES) {
+            return;
+        }
+
         memory[address] = computer.dataBus;
     }
 
