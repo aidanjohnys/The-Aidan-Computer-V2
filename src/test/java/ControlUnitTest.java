@@ -52,4 +52,24 @@ public class ControlUnitTest {
         computer.start();
         Assertions.assertEquals(20, computer.accumulator);
     }
+
+    @Test
+    public void loadTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+
+        computer.loadProgramIntoMemory(new byte[] {LDA, 0x01, (byte) 0x00, numA});
+        computer.start();
+        Assertions.assertEquals(50, computer.accumulator);
+    }
+
+    @Test
+    public void loadImmediateTest() {
+        Computer computer = new Computer();
+        byte numA = 50;
+
+        computer.loadProgramIntoMemory(new byte[] {LDI, numA});
+        computer.start();
+        Assertions.assertEquals(50, computer.accumulator);
+    }
 }
