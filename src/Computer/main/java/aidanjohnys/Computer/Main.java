@@ -1,6 +1,4 @@
-package aidanjohnys;
-
-import aidanjohnys.Computer.Computer;
+package aidanjohnys.Computer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
