@@ -1,4 +1,4 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

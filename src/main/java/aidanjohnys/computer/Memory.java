@@ -1,6 +1,6 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
-import static aidanjohnys.Computer.Computer.*;
+import static aidanjohnys.computer.Computer.*;
 
 public class Memory implements AddressableMemory {
     private static final char CAPACITY_BYTES = 254;

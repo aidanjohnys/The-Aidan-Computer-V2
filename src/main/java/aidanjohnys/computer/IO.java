@@ -1,8 +1,8 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
 import java.io.IOException;
 
-import static aidanjohnys.Computer.Computer.*;
+import static aidanjohnys.computer.Computer.*;
 
 public class IO implements AddressableMemory {
     private final Computer computer;

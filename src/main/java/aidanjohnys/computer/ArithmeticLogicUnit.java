@@ -1,6 +1,6 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
-import static aidanjohnys.Computer.Instructions.*;
+import static aidanjohnys.computer.Instructions.*;
 
 public class ArithmeticLogicUnit {
     private final Computer computer;

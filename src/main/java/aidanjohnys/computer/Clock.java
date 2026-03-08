@@ -1,8 +1,8 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
 import java.util.concurrent.TimeUnit;
 
-import static aidanjohnys.Computer.Computer.COMPUTER_STATUS_READY;
+import static aidanjohnys.computer.Computer.COMPUTER_STATUS_READY;
 
 public class Clock {
     private final static float CLOCK_SPEED_HZ = 1000;

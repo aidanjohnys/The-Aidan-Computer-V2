@@ -1,4 +1,4 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
 
 import java.io.DataInputStream;

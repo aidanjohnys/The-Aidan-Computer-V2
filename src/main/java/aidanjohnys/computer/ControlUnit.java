@@ -1,7 +1,7 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
 
-import static aidanjohnys.Computer.Computer.*;
-import static aidanjohnys.Computer.Instructions.*;
+import static aidanjohnys.computer.Computer.*;
+import static aidanjohnys.computer.Instructions.*;
 
 public class ControlUnit {
     private final Computer computer;

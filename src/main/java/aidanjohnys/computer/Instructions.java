@@ -1,4 +1,5 @@
-package aidanjohnys.Computer;
+package aidanjohnys.computer;
+
 
 public class Instructions {
     public static final byte HLT = 0x00;
