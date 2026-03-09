@@ -2,7 +2,6 @@ package aidanjohnys.assembler;
 
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,10 +21,14 @@ public class Main {
         Path path = Paths.get(fileHandle);
         try {
             BufferedReader reader = Files.newBufferedReader(path);
-            ArrayList<Token> tokens = LexicalAnalyser(reader);
+            ArrayList<ArrayList<Token>> statements = LexicalAnalyser(reader);
 
-            for (Token token : tokens) {
-                System.out.println(token.type.toString() + ", " + token.value + "\n");
+            for (ArrayList<Token> tokens : statements) {
+                for (Token token : tokens) {
+                    System.out.print("(" + token.type.toString() + ", " + token.value + "), ");
+                }
+
+                System.out.println();
             }
         }
 
