@@ -1,6 +1,8 @@
 package aidanjohnys.computer;
 
 
+import java.util.HashSet;
+
 public class Instructions {
     public static final byte HLT = 0x00;
     public static final byte ADD = 0x01;
@@ -15,4 +17,20 @@ public class Instructions {
     public static final byte JNZ = 0x0B;
     public static final byte JCS = 0x0E;
     public static final byte JCC = 0x0F;
+
+    public static HashSet<String> getMnemonics() {
+        final HashSet<String> mnemonics = new HashSet<>();
+        mnemonics.add("HLT");
+        mnemonics.add("ADD");
+        mnemonics.add("SUB");
+        mnemonics.add("STA");
+        mnemonics.add("LDA");
+        mnemonics.add("JMP");
+        mnemonics.add("JPZ");
+        mnemonics.add("JNZ");
+        mnemonics.add("JCS");
+        mnemonics.add("JCC");
+
+        return mnemonics;
+    }
 }

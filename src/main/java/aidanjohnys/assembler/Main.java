@@ -23,9 +23,13 @@ public class Main {
         try {
             BufferedReader reader = Files.newBufferedReader(path);
             ArrayList<Token> tokens = LexicalAnalyser(reader);
+
+            for (Token token : tokens) {
+                System.out.println(token.type.toString() + ", " + token.value + "\n");
+            }
         }
 
-        catch (IOException e) {
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
 

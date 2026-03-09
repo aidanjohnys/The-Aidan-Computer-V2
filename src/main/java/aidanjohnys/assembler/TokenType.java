@@ -1,9 +1,12 @@
 package aidanjohnys.assembler;
 
 public enum TokenType {
-    constant,
+    hexConstant,
+    charConstant,
+    decimalConstant,
     identifier,
     assignment,
     instruction,
-    label
+    label,
+    unknown
 }
