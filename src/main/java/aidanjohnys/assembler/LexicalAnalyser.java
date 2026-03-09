@@ -60,12 +60,6 @@ public class LexicalAnalyser {
                             continue;
                         }
 
-                        // todo: remove this block
-                        // Instruction with missing argument
-                        if (expectedToken == argument) {
-                            throw new SyntaxError(lineNo, word, expectedToken);
-                        }
-
                         throw new SyntaxError(lineNo, word, expectedToken);
                     }
 
